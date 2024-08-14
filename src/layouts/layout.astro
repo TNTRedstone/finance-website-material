@@ -1,0 +1,29 @@
+---
+import Styles from "../../node_modules/astro-material-design/components/styles.astro"
+
+interface Props {
+	title: string | boolean
+}
+
+const title = Astro.props.title
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {title === false ? <title>Finances</title> : <title>Finances | {title}</title>}
+</head>
+<body>
+    <Styles hex="#008000" dark></Styles>
+    <slot></slot>
+</body>
+<style>
+    body {
+        background-color: var(--md-color-surface);
+    }
+</style>
+</html>
