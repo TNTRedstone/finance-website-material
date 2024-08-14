@@ -11,8 +11,8 @@ import data from "./data.json"
 			<ListItem>
 				<Fragment slot="headline">{item.label}</Fragment>
 				<Fragment slot="supporting">{item.date}</Fragment>
-				<Fragment slot="trailing"><CheckBox></CheckBox></Fragment>
-
+				<Fragment slot="leading">{item.cashed_out ? <CheckBox state="selected"></CheckBox> : <CheckBox></CheckBox>}</Fragment>
+                <Fragment slot="trailing" className="md-typescale-body-medium">${item.amount}</Fragment>
 			</ListItem>
 		)
 	}
