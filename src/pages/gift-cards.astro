@@ -1,0 +1,18 @@
+---
+import ListItem from "../../node_modules/astro-material-design/components/containment/list-item.astro"
+import CheckBox from "../components/checkbox.astro"
+import Layout from "../layouts/layout.astro"
+import data from "./data.json"
+---
+
+<Layout title="Income">
+    {
+        data.gift_cards.map((item) =>
+                <ListItem>
+                    <Fragment slot="headline">{item.type}</Fragment>
+                    <Fragment slot="supporting">{item.code}</Fragment>
+                    <Fragment slot="trailing" class="md-typescale-body-large"><p class="md-typescale-body-medium" style="color: var(--md-color-on-surface-variant); margin: 0;">${item.amount}</p></Fragment>
+                </ListItem>
+        )
+    }
+</Layout>
