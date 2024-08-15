@@ -1,18 +1,18 @@
 ---
 import ListItem from "../../node_modules/astro-material-design/components/containment/list-item.astro"
-import CheckBox from "../../node_modules/astro-material-design/components/selection/checkbox.astro"
+import CheckBox from "../components/checkbox.astro"
 import Layout from "../layouts/layout.astro"
 import data from "./data.json"
 ---
 
-<Layout title={false}>
+<Layout title="Income">
 	{
 		data.income.map((item) =>
 			<ListItem>
 				<Fragment slot="headline">{item.label}</Fragment>
 				<Fragment slot="supporting">{item.date}</Fragment>
-				<Fragment slot="leading">{item.cashed_out ? <CheckBox state="selected"></CheckBox> : <CheckBox></CheckBox>}</Fragment>
-                <Fragment slot="trailing" className="md-typescale-body-medium">${item.amount}</Fragment>
+				<div slot="leading">{item.cashed_out ? <CheckBox state="selected"></CheckBox> : <CheckBox></CheckBox>}</div>
+                <Fragment slot="trailing" class="md-typescale-body-large"><p class="md-typescale-body-medium" style="color: var(--md-color-on-surface-variant); margin: 0;">${item.amount}</p></Fragment>
 			</ListItem>
 		)
 	}

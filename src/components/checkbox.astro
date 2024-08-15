@@ -1,0 +1,66 @@
+---
+import Icon from "../../node_modules/astro-material-design/components/icon.astro";
+interface Props {
+    state?: 'unselected' | 'selected' | 'indeterminate',
+    id?: string,
+    className?: string,
+    slot?: string,
+    style?: string
+}
+
+const { state = 'unselected', id, className, slot, style } = Astro.props
+
+const decoder: any = {unselected: 'check_box_outline_blank', selected: 'check_box', indeterminate: 'indeterminate_check_box'}
+---
+
+<div class:list={["md-shape-corner-full", state, className]} id={id} slot={slot} style={style} onclick="">
+    <Icon color={state == 'unselected' ? "var(--md-color-on-surface-variant)" : "var(--md-color-primary)"} fill={state == 'unselected' ? "0" : "1"}>{decoder[state]}</Icon>
+</div>
+
+<script is:inline>
+    document.querySelector('div').addEventListener('onclick', (e) => {
+        if (e.target.classList.contains('indeterminate')) {
+            e.target.classList.remove('indeterminate')
+            e.target.classList.add('unselected'); e.target.children[0].style = `--fillNum: 0;--weightNum: 400;--gradeNum: 0;--size: 24px;--color: var(--md-color-on-surface-variant);--clearance: 0;`
+            e.target.children[0].innerText = 'check_box_outline_blank'
+        } else {
+            if (e.target.classList.contains('unselected')) {
+                e.target.children[0].style = `--fillNum: 1;--weightNum: 400;--gradeNum: 0;--size: 24px;--color: var(--md-color-primary);--clearance: 0;`
+                e.target.children[0].innerText = 'check_box'
+            } else {
+                e.target.children[0].style = `--fillNum: 0;--weightNum: 400;--gradeNum: 0;--size: 24px;--color: var(--md-color-on-surface-variant);--clearance: 0;`
+                e.target.children[0].innerText = 'check_box_outline_blank'
+            }
+            e.target.classList.toggle('unselected')
+            e.target.classList.toggle('selected')
+        }
+    })
+</script>
+
+<style>
+    div {
+        width: fit-content;
+        height: fit-content;
+    }
+
+    div::after {
+        content: "";
+        width: 40px;
+        height: 40px;
+        border-radius: 100vh;
+        position: absolute;
+        top: 14px;
+        left: 8px;
+        right: 8px;
+    }
+
+    div.selected:hover::after, div.indeterminate:hover::after {
+        background: var(--md-color-primary);
+        opacity: 0.08;
+    }
+
+    div.unselected:hover::after {
+        background: var(--md-color-on-surface);
+        opacity: 0.08;
+    }
+</style>
