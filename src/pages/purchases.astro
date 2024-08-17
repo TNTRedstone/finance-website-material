@@ -1,0 +1,18 @@
+---
+import ListItem from "../../node_modules/astro-material-design/components/containment/list-item.astro"
+import Layout from "../layouts/layout.astro"
+import data from "./data.json"
+---
+
+<Layout title="Purchases">
+    {
+        data.purchases.map((item) =>
+                <ListItem>
+                    <Fragment slot="headline">{item.label}</Fragment>
+                    <Fragment slot="supporting">{item.date}</Fragment>
+                    <Fragment slot="leading"><p class="md-typescale-label-small" style="width: 35px; text-align: center; line-height: 1.15; color: var(--md-color-on-surface-variant); margin: 0;">${item.gift_card_amount + "\n"}${item.income_amount}</p></Fragment>
+                    <Fragment slot="trailing"><p class="md-typescale-label-small" style="width: 300px; text-align: center; line-height: 1.15; color: var(--md-color-on-surface-variant); margin: 0;">{item.type != "" ? item.type + ": " : ""}{item.codes.join(",\n")}</p></Fragment>
+                </ListItem>
+        )
+    }
+</Layout>
