@@ -1,0 +1,102 @@
+---
+import Layout from "../layouts/layout.astro"
+import DatePicker from "../components/date-picker.astro"
+---
+
+<Layout title="Goals">
+    <DatePicker></DatePicker>
+    <div class:list={["container md-motion-easing-emphasized md-motion-duration-short4 outlined"]}>
+        <slot name="leading-icon" />
+        <div class="input">
+            <input id="number" type="number" min="0" value="0" style="label-text md-typescale-body-large md-motion-easing-emphasized md-motion-duration-short4 outlined" required></input>
+            <label class:list={["label-text md-typescale-body-large md-motion-easing-emphasized md-motion-duration-short4 outlined"]} for="number">Price</label>
+        </div>
+        <slot name="trailing-icon" />
+    </div>
+
+</Layout>
+
+<style>
+    .container.outlined {
+        border: 1px solid var(--md-color-outline);
+        background: none;
+    }
+
+    .container {
+        background: var(--md-color-surface-container-highest);
+        height: 56px;
+        box-sizing: border-box;
+        border-bottom: 1px solid var(--md-color-on-surface-variant);
+        padding: 8px 16px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        max-width: 100px;
+        position: relative;
+    }
+
+    .input {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .label-text {
+        color: var(--md-color-on-surface-variant);
+        cursor: text;
+        width: 100%;
+        height: 100%;
+        line-height: 39px;
+    }
+
+    input {
+        color: var(--md-color-on-surface);
+        caret-color: var(--md-color-primary);
+        height: 0;
+        background: none;
+        border: none;
+        padding: 0;
+        width: 100%;
+        order: 1;
+    }
+
+    input:focus, input:valid {
+        height: 100%;
+        outline: none;
+    }
+
+    input:focus + .label-text.outlined, input:valid + .label-text.outlined {
+        position: absolute;
+        top: -16px;
+        left: 12px;
+        background: var(--md-color-surface-variant);
+        width: fit-content;
+        padding: 4px;
+    }
+
+    input:focus + .label-text, input:valid + .label-text {
+        height: fit-content;
+        font-size: 12pt;
+        line-height: 16pt;
+    }
+
+    .container.outlined:focus-within {
+        border: 2px solid var(--md-color-primary);
+    }
+
+    .container:focus-within {
+        border-bottom: 2px solid var(--md-color-primary);
+    }
+
+    .container:focus-within .input .label-text {
+        color: var(--md-color-primary);
+    }
+
+    * {
+        margin: 0;
+    }
+</style>
