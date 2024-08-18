@@ -30,18 +30,18 @@ function daysPassed(startDateString: string): number {
 }
 
 // TODO: go through purchases in reverse, on the first purchase that is less than 15, return true or false as to weather it was more than 7 days ago
-function isPurchaseTooRecent(group_cost: number ,greater_than = false) {
+function isPurchaseTooRecent(group_cost: number, days: number, greater_than = false) {
     let return_value = false
     if (greater_than == false) {
         data.purchases.slice().reverse().forEach((purchase) => {
-            if (purchase.gift_card_amount + purchase.income_amount > group_cost && daysPassed(purchase.date) <= 7) {
+            if (purchase.gift_card_amount + purchase.income_amount > group_cost && daysPassed(purchase.date) <= days) {
                 return_value = true
             }
         })
     }
     if (greater_than == true) {
         data.purchases.slice().reverse().forEach((purchase) => {
-            if (purchase.gift_card_amount + purchase.income_amount < group_cost && daysPassed(purchase.date) <= 7) {
+            if (purchase.gift_card_amount + purchase.income_amount < group_cost && daysPassed(purchase.date) <= days) {
                 return_value = true
             }
         })
@@ -49,10 +49,10 @@ function isPurchaseTooRecent(group_cost: number ,greater_than = false) {
     return return_value
 }
 
-let less_than_15_max: number = !isPurchaseTooRecent(15) ? (gift_card_money_total + income_total) * .3 : 0
-let less_than_40_max: number = !isPurchaseTooRecent(40) ? (gift_card_money_total + income_total) * .4 : 0
-let less_than_120_max: number = !isPurchaseTooRecent(120) ? (gift_card_money_total + income_total) * .55 : 0
-let more_than_120_max: number = !isPurchaseTooRecent(15, true) ? (gift_card_money_total + income_total) * .625 : 0
+let less_than_15_max: number = !isPurchaseTooRecent(15, 7) ? (gift_card_money_total + income_total) * .3 : 0
+let less_than_40_max: number = !isPurchaseTooRecent(40, 21) ? (gift_card_money_total + income_total) * .4 : 0
+let less_than_120_max: number = !isPurchaseTooRecent(120, 42) ? (gift_card_money_total + income_total) * .55 : 0
+let more_than_120_max: number = !isPurchaseTooRecent(120, 84, true) ? (gift_card_money_total + income_total) * .625 : 0
 
 function moneyEarnedInLast(days: number) {
     let return_value = 0
