@@ -177,7 +177,7 @@
         { "amount": 3, "label": "Weeding the rocks", "cashed_out": false,
             "date": "7/12/2024"
         },
-        { "amount": 2, "label": "Weeding the rocks", "cashed_out": false,
+        { "amount": 2, "label": "Weeding the rocks", "cashed_out": true,
             "date": "7/13/2024"
         },
         { "amount": 3, "label": "Garden", "cashed_out": false,
@@ -186,10 +186,10 @@
         { "amount": 10, "label": "Lawn mower", "cashed_out": true,
             "date": "7/13/2024"
         },
-        { "amount": 2, "label": "Weeding the rocks", "cashed_out": false,
+        { "amount": 2, "label": "Weeding the rocks", "cashed_out": true,
             "date": "7/16/2024"
         },
-        { "amount": 2, "label": "Weeding the rocks", "cashed_out": false,
+        { "amount": 2, "label": "Weeding the rocks", "cashed_out": true,
             "date": "7/17/2024"
         },
         { "amount": 8, "label": "Sticks", "cashed_out": false,
@@ -204,8 +204,14 @@
         { "amount": 9, "label": "Chores", "cashed_out": false,
             "date": "8/9/2024"
         },
-        { "amount": 3, "label": "Weeding", "cashed_out": false,
+        { "amount": 3, "label": "Weeding", "cashed_out": true,
             "date": "8/13/2024"
+        },
+        { "amount": 8, "label": "Washing the car", "cashed_out": true,
+            "date": "8/16/2024"
+        },
+        { "amount": 8, "label": "Washing the white truck", "cashed_out": true,
+            "date": "8/17/2024"
         }
     ],
     "gift_cards": [
@@ -217,17 +223,19 @@
         { "amount": 30, "type": "Amazon", "code": "Online#1" }
     ],
     "purchases": [
-        { "label": "Bluetooth dongle", "date": "8/14/2024", "type": "Amazon", "codes": ["AQKB-UX6TWB-9HDAX"], "gift_card_amount": 14, "income_amount": 0 },
-        { "label": "Sim racing", "date": "8/14/2024", "type": "Amazon", "codes": ["AQZ8-XU88DW-JXAA6", "AQDP-NSU5KL-F2KAX"], "gift_card_amount": 60, "income_amount": 69 },
-        { "label": "ACC", "date": "8/14/2024", "type": "Amazon", "codes": ["AQKB-UX6TWB-9HDAX"], "gift_card_amount": 11, "income_amount": 40 },
-        { "label": "DSLR", "date": "8/14/2024", "type": "Amazon", "codes": ["ASLF-3CTY3V-DH2AX", "Online#1"], "gift_card_amount": 80, "income_amount": 80 },
-        { "label": "EA Play", "date": "8/14/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 5 },
-        { "label": "Assetto Corsa", "date": "8/14/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 12 },
-        { "label": "Speaker for sim", "date": "8/14/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 28 },
-        { "label": "Mousepad", "date": "8/14/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 10 },
-        { "label": "Mclaren poster", "date": "8/14/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 20 },
-        { "label": "Wireless mouse", "date": "8/14/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 15 },
-        { "label": "Light switch cover", "date": "8/14/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 5 },
-        { "label": "EA Play", "date": "8/14/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 20 }
-    ]
+        { "label": "Bluetooth dongle", "date": "8/1/2024", "type": "Amazon", "codes": ["AQKB-UX6TWB-9HDAX"], "gift_card_amount": 14, "income_amount": 0 },
+        { "label": "Sim racing", "date": "8/1/2024", "type": "Amazon", "codes": ["AQZ8-XU88DW-JXAA6", "AQDP-NSU5KL-F2KAX"], "gift_card_amount": 60, "income_amount": 69 },
+        { "label": "ACC", "date": "8/1/2024", "type": "Amazon", "codes": ["AQKB-UX6TWB-9HDAX"], "gift_card_amount": 11, "income_amount": 40 },
+        { "label": "DSLR", "date": "8/1/2024", "type": "Amazon", "codes": ["ASLF-3CTY3V-DH2AX", "Online#1"], "gift_card_amount": 80, "income_amount": 80 },
+        { "label": "EA Play", "date": "8/1/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 5 },
+        { "label": "Assetto Corsa", "date": "8/1/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 12 },
+        { "label": "Speaker for sim", "date": "8/1/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 28 },
+        { "label": "Mousepad", "date": "8/1/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 10 },
+        { "label": "Mclaren poster", "date": "8/1/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 20 },
+        { "label": "Wireless mouse", "date": "8/1/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 15 },
+        { "label": "Light switch cover", "date": "8/1/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 5 },
+        { "label": "EA Play", "date": "8/1/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 20 },
+        { "label": "DSLR batteries", "date": "8/18/2024", "type": "", "codes": [], "gift_card_amount": 0, "income_amount": 25 }
+    ],
+    "goal_settings": { "price": 200, "date": "9/6/2024" }
 }
