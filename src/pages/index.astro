@@ -57,7 +57,9 @@ let more_than_120_max: number = !isPurchaseTooRecent(15, true) ? (gift_card_mone
 function moneyEarnedInLast(days: number) {
     let return_value = 0
     data.income.forEach((income) => {
-        return_value += income.amount;
+        if (daysPassed(income.date) <= days) {
+            return_value += income.amount;
+        }
     })
     return return_value
 }
@@ -65,7 +67,9 @@ function moneyEarnedInLast(days: number) {
 function moneySpentInLast(days: number) {
     let return_value = 0
     data.purchases.forEach((purchase) => {
-        return_value += purchase.income_amount + purchase.gift_card_amount;
+        if (daysPassed(purchase.date) <= days) {
+            return_value += purchase.income_amount + purchase.gift_card_amount;
+        }
     })
     return return_value
 }
