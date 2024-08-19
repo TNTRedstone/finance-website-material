@@ -34,14 +34,14 @@ function isPurchaseTooRecent(group_cost: number, days: number, greater_than = fa
     let return_value = false
     if (greater_than == false) {
         data.purchases.slice().reverse().forEach((purchase) => {
-            if (purchase.gift_card_amount + purchase.income_amount > group_cost && daysPassed(purchase.date) <= days) {
+            if (purchase.gift_card_amount + purchase.income_amount < group_cost && daysPassed(purchase.date) <= days) {
                 return_value = true
             }
         })
     }
     if (greater_than == true) {
         data.purchases.slice().reverse().forEach((purchase) => {
-            if (purchase.gift_card_amount + purchase.income_amount < group_cost && daysPassed(purchase.date) <= days) {
+            if (purchase.gift_card_amount + purchase.income_amount > group_cost && daysPassed(purchase.date) <= days) {
                 return_value = true
             }
         })

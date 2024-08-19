@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/layout.astro"
 import DatePicker from "../components/date-picker.astro"
-import Button from "../../node_modules/astro-material-design/components/actions/button.astro"
 import data from "./data.json"
 import fs from "node:fs"
 
@@ -14,6 +13,8 @@ function convertDateString(dateString: string): string {
     const day = dateParts[1].padStart(2, "0");
     return `${year}-${month}-${day}`;
 }
+
+
 ---
 
 <Layout title="Goals">
@@ -27,9 +28,17 @@ function convertDateString(dateString: string): string {
             </div>
             <slot name="trailing-icon" />
         </div>
-        <Button type="elevated" onclick='data.goal_settings.price = document.getElementById("number").value;data.goal_settings.date = document.querySelector("input#text-input.md-typescale-body-large").value;fs.writeFile("./data.json", JSON.stringify(data, null, 4), (err) => {if (err) {console.log("An error has occurred ", err);return;}});' >Submit</Button>
+        <button onclick='fetch(`http://10.0.0.178:5001/data/${document.getElementById("number").value}/${document.querySelector("#text-input").value}`, {
+            mode: "no-cors"
+        })'>Submit</button>
     </div>
 </Layout>
+
+<script>
+    function submit() {
+        fetch(`http://10.0.0.178:5001/data/${document.getElementById("number").value}/${document.querySelector("#text-input").value}`, {})
+    }
+</script>
 
 <style>
     .container.outlined {
