@@ -1,10 +1,27 @@
 ---
 import Layout from "../layouts/layout.astro"
 import DatePicker from "../components/date-picker.astro"
-import data from "./data.json"
-import fs from "node:fs"
+import data from "../../public/data.json"
 
-fs.writeFile("./data.json", JSON.stringify(data, null, 4), (err) => {if (err) {console.log('An error has occurred ', err);return;}})
+let gift_card_money_total: number = 0;
+
+data.gift_cards.forEach((card) => {
+    card.type == "Amazon" ? gift_card_money_total += card.amount : null;
+})
+
+data.purchases.forEach((purchase) => {
+    gift_card_money_total -= purchase.gift_card_amount;
+})
+
+let income_total: number = 0;
+
+data.income.forEach((income) => {
+    income_total += income.amount;
+})
+
+data.purchases.forEach((purchase) => {
+    income_total -= purchase.income_amount;
+})
 
 function convertDateString(dateString: string): string {
     const dateParts = dateString.split("/");
@@ -14,33 +31,156 @@ function convertDateString(dateString: string): string {
     return `${year}-${month}-${day}`;
 }
 
+function daysPassed(startDateString: string): number {
+    const startDate = new Date(startDateString);
+    const currentDate = new Date();
+    const timeDifference = currentDate.getTime() - startDate.getTime();
+    return Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+}
 
+let daysLeft: number = daysPassed(data.goal_settings.date) * -1;
+let amountLeft: number = data.goal_settings.price - (income_total + gift_card_money_total);
+let dailyChoreAmount: number = (data.goal_settings.price - (income_total + gift_card_money_total)) / daysPassed(data.goal_settings.date) * -1;
+
+let percent: number = .3;
+
+if (data.goal_settings.price <= 15) {
+    dailyChoreAmount /= .3;
+    percent = .3;
+} else if (data.goal_settings.price <= 40) {
+    dailyChoreAmount /= .4;
+    percent = .4;
+} else if (data.goal_settings.price <= 120) {
+    dailyChoreAmount /= .55;
+    percent = .55;
+} else if (data.goal_settings.price >= 120) {
+    dailyChoreAmount /= .625;
+    percent = .625;
+}
+
+let weeklyChoreAmount: number = dailyChoreAmount * 7;
+let dailyChoreTime: number = Math.ceil((dailyChoreAmount / 8) * 8) / 8 * 60;
+let weeklyChoreTime: number = dailyChoreTime * 7;
+
+// export const prerender = false
 ---
 
 <Layout title="Goals">
     <div style="display: flex; gap: 8px; align-items: center; justify-content: center;">
         <DatePicker value={convertDateString(data.goal_settings.date)}></DatePicker>
         <div class:list={["container md-motion-easing-emphasized md-motion-duration-short4 outlined"]}>
-            <slot name="leading-icon" />
+            <slot name="leading-icon"/>
             <div class="input">
-                <input id="number" type="number" min="0" value={data.goal_settings.price} style="label-text md-typescale-body-large md-motion-easing-emphasized md-motion-duration-short4 outlined" required></input>
-                <label class:list={["label-text md-typescale-body-large md-motion-easing-emphasized md-motion-duration-short4 outlined"]} for="number">Price</label>
+                <input id="number" type="number" min="0" value={data.goal_settings.price}
+                       style="label-text md-typescale-body-large md-motion-easing-emphasized md-motion-duration-short4 outlined"
+                       required></input>
+                <label class:list={["label-text md-typescale-body-large md-motion-easing-emphasized md-motion-duration-short4 outlined"]}
+                       for="number">Price</label>
             </div>
-            <slot name="trailing-icon" />
+            <slot name="trailing-icon"/>
         </div>
-        <button onclick='fetch(`http://10.0.0.178:5001/data/${document.getElementById("number").value}/${document.querySelector("#text-input").value}`, {
-            mode: "no-cors"
-        })'>Submit</button>
+        <button class={`elevated md-shape-corner-full md-typescale-label-large md-motion-easing-emphasized md-motion-duration-short4`}
+                style="padding: 16px"
+                onclick='console.log(`./fswrite/${document.getElementById("number").value.toString()}/${document.getElementById("text-input").value.replaceAll("/", "-")}`)'
+        >Submit</button>
     </div>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Days left for goal: {daysLeft}</p>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Amount left for goal: ${amountLeft.toFixed(2)}</p>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Daily chore amount: ${dailyChoreAmount.toFixed(2)}</p>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Weekly chore amount: ${weeklyChoreAmount.toFixed(2)}</p>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Daily chore time: {dailyChoreTime} minutes</p>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Weekly chore time: {weeklyChoreTime} minutes</p>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Amount you can spend right now: ${((income_total + gift_card_money_total) * percent).toFixed(2)}</p>
 </Layout>
 
-<script>
-    function submit() {
-        fetch(`http://10.0.0.178:5001/data/${document.getElementById("number").value}/${document.querySelector("#text-input").value}`, {})
-    }
-</script>
-
 <style>
+    button.elevated {
+        height: 40px;
+        background: var(--md-color-surface-container-low);
+        overflow: hidden;
+        position: relative;
+        color: var(--md-color-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: var(--padding);
+        border: none;
+        cursor: pointer;
+    }
+
+    button.elevated::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--md-color-surface-tint);
+        overflow: hidden;
+    }
+
+    button.elevated:hover {
+        box-shadow: rgba(0, 0, 0, 0.25) 0 2.25px 3px 1.5px;
+    }
+
+    button.elevated:hover::after {
+        background: var(--md-color-primary);
+        opacity: 0.08;
+    }
+
+    button.elevated:focus {
+        outline: none;
+    }
+
+    button.elevated:focus::after {
+        background: var(--md-color-primary);
+        opacity: 0.1;
+    }
+
+    button.text {
+        height: 40px;
+        overflow: hidden;
+        background: none;
+        position: relative;
+        color: var(--md-color-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: var(--padding);
+        border: none;
+        cursor: pointer;
+    }
+
+    button.text:hover::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--md-color-primary);
+        opacity: 0.08;
+        overflow: hidden;
+    }
+
+    button.text:focus {
+        outline: none;
+    }
+
+    button.text:focus::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--md-color-primary);
+        opacity: 0.1;
+        overflow: hidden;
+    }
+
     .container.outlined {
         border: 1px solid var(--md-color-outline);
         background: none;

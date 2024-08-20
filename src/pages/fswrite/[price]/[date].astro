@@ -1,0 +1,13 @@
+---
+import fs from "node:fs"
+import data from "../../../../public/data.json"
+
+const { price, date } = Astro.params
+
+data.goal_settings.price = Number(price);
+data.goal_settings.date = String(date).replaceAll("-", "/").replaceAll("}", "");
+
+fs.writeFile("../../../../public/data.json", JSON.stringify(data), (err) => {})
+
+export const prerender = false
+---

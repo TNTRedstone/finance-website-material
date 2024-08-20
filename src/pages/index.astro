@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/layout.astro"
-import data from "./data.json"
+import data from "../../public/data.json"
 
 let gift_card_money_total: number = 0;
 
@@ -78,6 +78,24 @@ let money_earned_in_week: number = moneyEarnedInLast(7)
 let money_earned_in_month: number = moneyEarnedInLast(28)
 let money_spent_in_week: number = moneySpentInLast(7)
 let money_spent_in_month: number = moneySpentInLast(28)
+
+let daysLeft: number = daysPassed(data.goal_settings.date) * -1;
+let amountLeft: number = data.goal_settings.price - (income_total + gift_card_money_total);
+let dailyChoreAmount: number = (data.goal_settings.price - (income_total + gift_card_money_total)) / daysPassed(data.goal_settings.date) * -1;
+
+if (data.goal_settings.price <= 15) {
+    dailyChoreAmount /= .3;
+} else if (data.goal_settings.price <= 40) {
+    dailyChoreAmount /= .4;
+} else if (data.goal_settings.price <= 120) {
+    dailyChoreAmount /= .55;
+} else if (data.goal_settings.price >= 120) {
+    dailyChoreAmount /= .625;
+}
+
+let weeklyChoreAmount: number = dailyChoreAmount * 7;
+let dailyChoreTime: number = Math.ceil((dailyChoreAmount / 8) * 8) / 8 * 60;
+let weeklyChoreTime: number = dailyChoreTime * 7;
 ---
 
 <Layout title={false}>
@@ -91,4 +109,12 @@ let money_spent_in_month: number = moneySpentInLast(28)
     <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Money earned in last month: ${money_earned_in_month}</p>
     <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Money spent in last week: ${money_spent_in_week}</p>
     <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Money spent in last month: ${money_spent_in_month}</p>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Goal finish date: {data.goal_settings.date}</p>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Goal price: ${data.goal_settings.price}</p>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Days left for goal: {daysLeft}</p>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Amount left for goal: ${amountLeft.toFixed(2)}</p>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Daily chore amount: ${dailyChoreAmount.toFixed(2)}</p>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Weekly chore amount: ${weeklyChoreAmount.toFixed(2)}</p>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Daily chore time: {dailyChoreTime} minutes</p>
+    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Weekly chore time: {weeklyChoreTime} minutes</p>
 </Layout>
