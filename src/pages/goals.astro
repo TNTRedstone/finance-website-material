@@ -1,7 +1,9 @@
 ---
 import Layout from "../layouts/layout.astro"
 import DatePicker from "../components/date-picker.astro"
-import data from "../../public/data.json"
+import data from "../data/data.json"
+
+export const prerender = false
 
 let gift_card_money_total: number = 0;
 
@@ -61,8 +63,6 @@ if (data.goal_settings.price <= 15) {
 let weeklyChoreAmount: number = dailyChoreAmount * 7;
 let dailyChoreTime: number = Math.ceil((dailyChoreAmount / 8) * 8) / 8 * 60;
 let weeklyChoreTime: number = dailyChoreTime * 7;
-
-// export const prerender = false
 ---
 
 <Layout title="Goals">
@@ -81,7 +81,7 @@ let weeklyChoreTime: number = dailyChoreTime * 7;
         </div>
         <button class={`elevated md-shape-corner-full md-typescale-label-large md-motion-easing-emphasized md-motion-duration-short4`}
                 style="padding: 16px"
-                onclick='console.log(`./fswrite/${document.getElementById("number").value.toString()}/${document.getElementById("text-input").value.replaceAll("/", "-")}`)'
+                onclick='window.location.href = `./fswrite/${document.getElementById("number").value.toString()}/${document.getElementById("text-input").value.replaceAll("/", "-")}`'
         >Submit</button>
     </div>
     <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Days left for goal: {daysLeft}</p>

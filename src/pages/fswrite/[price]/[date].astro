@@ -1,13 +1,21 @@
 ---
 import fs from "node:fs"
-import data from "../../../../public/data.json"
+import data from "../../../data/data.json"
 
 const { price, date } = Astro.params
 
-data.goal_settings.price = Number(price);
-data.goal_settings.date = String(date).replaceAll("-", "/").replaceAll("}", "");
+function convertDateBack(dateString: string): string {
+    const dateParts = dateString.split("-");
+    const month = dateParts[1];
+    const day = dateParts[2];
+    const year = dateParts[0];
+    return `${month}/${day}/${year}`;
+}
 
-fs.writeFile("../../../../public/data.json", JSON.stringify(data), (err) => {})
+data.goal_settings.price = Number(price);
+data.goal_settings.date = convertDateBack(String(date).replaceAll("-", "/").replaceAll("}", ""));
+
+fs.writeFileSync("./src/data/data.json", JSON.stringify(data))
 
 export const prerender = false
 ---
