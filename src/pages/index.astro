@@ -110,25 +110,59 @@ let weeklyChoreTime: number = dailyChoreTime * 7;
 ---
 
 <Layout title={false}>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Gift card total: ${gift_card_money_total}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Income total: ${income_total}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Less than $15 purchase max: ${less_than_15_max}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Less than $15 purchase max days left: {less_than_15_max_days_too_many.toString().replace("100000", "0")} days</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Less than $40 purchase max: ${less_than_40_max}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Less than $40 purchase max days left: {less_than_40_max_days_too_many.toString().replace("100000", "0")} days</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Less than $120 purchase max: ${less_than_120_max}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Less than 120 purchase max days left: {less_than_120_max_days_too_many.toString().replace("100000", "0")} days</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">More than $120 purchase max: ${more_than_120_max}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Money earned in last week: ${money_earned_in_week}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Money earned in last month: ${money_earned_in_month}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Money spent in last week: ${money_spent_in_week}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Money spent in last month: ${money_spent_in_month}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Goal finish date: {data.goal_settings.date}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Goal price: ${data.goal_settings.price}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Days left for goal: {daysLeft}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Amount left for goal: ${amountLeft.toFixed(2)}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Daily chore amount: ${dailyChoreAmount.toFixed(2)}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Weekly chore amount: ${weeklyChoreAmount.toFixed(2)}</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Daily chore time: {dailyChoreTime} minutes</p>
-    <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Weekly chore time: {weeklyChoreTime} minutes</p>
+    <div class="info-container">
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Gift card total:
+        ${gift_card_money_total}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Income total: ${income_total}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Less than $15 purchase max:
+            ${less_than_15_max}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Less than $15 purchase max days
+            left: {less_than_15_max_days_too_many.toString().replace("100000", "0")} days</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Less than $40 purchase max:
+            ${less_than_40_max}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Less than $40 purchase max days
+            left: {less_than_40_max_days_too_many.toString().replace("100000", "0")} days</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Less than $120 purchase max:
+            ${less_than_120_max}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Less than 120 purchase max days
+            left: {less_than_120_max_days_too_many.toString().replace("100000", "0")} days</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">More than $120 purchase max:
+            ${more_than_120_max}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Money earned in last week:
+            ${money_earned_in_week}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Money earned in last month:
+            ${money_earned_in_month}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Money spent in last week:
+            ${money_spent_in_week}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Money spent in last month:
+            ${money_spent_in_month}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Goal finish
+            date: {data.goal_settings.date}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Goal price:
+            ${data.goal_settings.price}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Days left for
+            goal: {daysLeft}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Amount left for goal:
+            ${amountLeft.toFixed(2)}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Daily chore amount:
+            ${dailyChoreAmount.toFixed(2)}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Weekly chore amount:
+            ${weeklyChoreAmount.toFixed(2)}</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Daily chore
+            time: {dailyChoreTime} minutes</p>
+        <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Weekly chore
+            time: {weeklyChoreTime} minutes</p>
+    </div>
+    <style>
+        .info-container {
+            height: 25vh;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .info-container > p {
+            margin: 0;
+            text-align: center;
+        }
+    </style>
 </Layout>
