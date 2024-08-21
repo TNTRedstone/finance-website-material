@@ -40,6 +40,10 @@ function daysPassed(startDateString: string): number {
     return Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 }
 
+function convertDateBack(dateString: string): string {
+
+}
+
 let daysLeft: number = daysPassed(data.goal_settings.date) * -1;
 let amountLeft: number = data.goal_settings.price - (income_total + gift_card_money_total);
 let dailyChoreAmount: number = (data.goal_settings.price - (income_total + gift_card_money_total)) / daysPassed(data.goal_settings.date) * -1;
@@ -81,7 +85,12 @@ let weeklyChoreTime: number = dailyChoreTime * 7;
         </div>
         <button class={`elevated md-shape-corner-full md-typescale-label-large md-motion-easing-emphasized md-motion-duration-short4`}
                 style="padding: 16px"
-                onclick='window.location.href = `./fswrite/${document.getElementById("number").value.toString()}/${document.getElementById("text-input").value.replaceAll("/", "-")}`'
+                onclick='
+                const dateParts = document.getElementById("text-input").value.split("-");
+                const month = dateParts[1];
+                const day = dateParts[2];
+                const year = dateParts[0];
+                window.location.href = `./fswrite/${document.getElementById("number").value.toString()}/${`${month}/${day}/${year}`.replaceAll("/", "-")}`'
         >Submit</button>
     </div>
     <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Days left for goal: {daysLeft}</p>

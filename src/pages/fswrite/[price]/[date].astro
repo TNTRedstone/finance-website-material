@@ -7,16 +7,10 @@ export const prerender = false
 
 const { price, date } = Astro.params
 
-function convertDateBack(dateString: string): string {
-    const dateParts = dateString.split("/");
-    const month = dateParts[1];
-    const day = dateParts[2];
-    const year = dateParts[0];
-    return `${month}/${day}/${year}`;
-}
+
 
 data.goal_settings.price = Number(price);
-data.goal_settings.date = convertDateBack(String(date).replaceAll("-", "/"));
+data.goal_settings.date = String(date).replaceAll("-", "/");
 console.log(data.goal_settings)
 
 fs.writeFileSync("./src/data/data.json", JSON.stringify(data))
