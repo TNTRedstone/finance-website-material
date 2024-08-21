@@ -40,29 +40,21 @@ function daysPassed(startDateString: string): number {
     return Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 }
 
-function convertDateBack(dateString: string): string {
-
-}
-
-let daysLeft: number = daysPassed(data.goal_settings.date) * -1;
-let amountLeft: number = data.goal_settings.price - (income_total + gift_card_money_total);
-let dailyChoreAmount: number = (data.goal_settings.price - (income_total + gift_card_money_total)) / daysPassed(data.goal_settings.date) * -1;
-
 let percent: number = .3;
 
 if (data.goal_settings.price <= 15) {
-    dailyChoreAmount /= .3;
     percent = .3;
 } else if (data.goal_settings.price <= 40) {
-    dailyChoreAmount /= .4;
     percent = .4;
 } else if (data.goal_settings.price <= 120) {
-    dailyChoreAmount /= .55;
     percent = .55;
 } else if (data.goal_settings.price >= 120) {
-    dailyChoreAmount /= .625;
     percent = .625;
 }
+
+let dailyChoreAmount: number = (data.goal_settings.price / percent - (income_total + gift_card_money_total)) / daysPassed(data.goal_settings.date) * -1;
+let daysLeft: number = daysPassed(data.goal_settings.date) * -1;
+let amountLeft: number = data.goal_settings.price / percent - (income_total + gift_card_money_total);
 
 let weeklyChoreAmount: number = dailyChoreAmount * 7;
 let dailyChoreTime: number = Math.ceil((dailyChoreAmount / 8) * 8) / 8 * 60;
