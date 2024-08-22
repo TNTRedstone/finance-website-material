@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/layout.astro"
 import data from "../data/data.json"
+import Button from "../components/button.astro"
 
 let gift_card_money_total: number = 0;
 
@@ -155,6 +156,48 @@ let weeklyChoreTime: number = dailyChoreTime * 7;
         <p class="md-typescale-body-medium" style="color: var(--md-color-on-surface);">Weekly chore
             time: {weeklyChoreTime} minutes</p>
     </div>
+    <div class="link-container">
+        <div>
+            <p class="md-typescale-body-large">Income list</p>
+            <p class="md-typescale-body-medium">A list of income you've made across all time</p>
+            <Button type="elevated"><a href="/income">Go to</a></Button>
+        </div>
+        <div>
+            <p class="md-typescale-body-large">Gift card list</p>
+            <p class="md-typescale-body-medium">A list of gift cards you've had</p>
+            <Button type="elevated"><a href="/gift-cards">Go to</a></Button>
+        </div>
+        <div>
+            <p class="md-typescale-body-large">Purchase list</p>
+            <p class="md-typescale-body-medium">A list of purchases across all time</p>
+            <Button type="elevated"><a href="/purchases">Go to</a></Button>
+        </div>
+        <div>
+            <p class="md-typescale-body-large">Income form</p>
+            <p class="md-typescale-body-medium">Form to add income to the sites lists and statistics</p>
+            <Button type="elevated"><a href="">Go to</a></Button>
+        </div>
+        <div>
+            <p class="md-typescale-body-large">Chore form</p>
+            <p class="md-typescale-body-medium">Form to enter a chore you did to the sites lists and statistics</p>
+            <Button type="elevated"><a href="">Go to</a></Button>
+        </div>
+        <div>
+            <p class="md-typescale-body-large">Gift card form</p>
+            <p class="md-typescale-body-medium">Form to add a gift card to the sites lists and statistics</p>
+            <Button type="elevated"><a href="">Go to</a></Button>
+        </div>
+        <div>
+            <p class="md-typescale-body-large">Purchase form</p>
+            <p class="md-typescale-body-medium">Form to add a purchase to the sites lists and statistics</p>
+            <Button type="elevated"><a href="">Go to</a></Button>
+        </div>
+        <div>
+            <p class="md-typescale-body-large">Goal page</p>
+            <p class="md-typescale-body-medium">A page to select your goal and give you statistics on how to achieve in the time you specified</p>
+            <Button type="elevated"><a href="/goals">Go to</a></Button>
+        </div>
+    </div>
     <style>
         .info-container {
             height: 25vh;
@@ -165,6 +208,34 @@ let weeklyChoreTime: number = dailyChoreTime * 7;
         .info-container > p {
             margin: 0;
             text-align: center;
+        }
+
+        .link-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            height: 60vh;
+            gap: 16px;
+            padding: 16px
+        }
+
+        .link-container > div {
+            background: var(--md-color-surface-variant);
+            border-radius: 15px;
+            padding: 12px;
+        }
+
+        .link-container > div > p.md-typescale-body-medium {
+            color: var(--md-color-on-surface-variant);
+        }
+
+        .link-container > div > p.md-typescale-body-large {
+            color: var(--md-color-on-surface);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--md-color-on-surface);
+            z-index: 1000000;
         }
     </style>
 </Layout>
