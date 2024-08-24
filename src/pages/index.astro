@@ -6,7 +6,7 @@ import Button from "../components/button.astro"
 let gift_card_money_total: number = 0;
 
 data.gift_cards.forEach((card) => {
-    card.type == "Amazon" ? gift_card_money_total += card.amount : null;
+    card.type == "Amazon" || card.type == "Visa" ? gift_card_money_total += card.amount : null;
 })
 
 data.purchases.forEach((purchase) => {

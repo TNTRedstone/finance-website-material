@@ -425,6 +425,24 @@
             "label": "Washing the white truck",
             "cashed_out": true,
             "date": "8/17/2024"
+        },
+        {
+            "amount": 2,
+            "label": "Vacuum",
+            "cashed_out": false,
+            "date": "8/20/2024"
+        },
+        {
+            "amount": 2,
+            "label": "Tractor",
+            "cashed_out": false,
+            "date": "8/21/2024"
+        },
+        {
+            "amount": 30,
+            "label": "Gram gift",
+            "cashed_out": true,
+            "date": "8/23/2024"
         }
     ],
     "gift_cards": [
@@ -457,6 +475,11 @@
             "amount": 30,
             "type": "Amazon",
             "code": "Online#1"
+        },
+        {
+            "amount": 20,
+            "type": "Visa",
+            "code": ""
         }
     ],
     "purchases": [
@@ -573,10 +596,18 @@
             "codes": [],
             "gift_card_amount": 0,
             "income_amount": 25
+        },
+        {
+            "label": "DSLR bag",
+            "date": "8/21/2024",
+            "type": "",
+            "codes": [],
+            "gift_card_amount": 0,
+            "income_amount": 30
         }
     ],
     "goal_settings": {
         "price": 170,
-        "date": "10/02/2024"
+        "date": "10/10/2024"
     }
 }
